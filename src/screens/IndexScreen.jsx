@@ -11,26 +11,29 @@ import { Feather } from "@expo/vector-icons";
 
 const IndexScreen = ({ navigation }) => {
   const { state, deleteBlogPost } = useContext(Context);
-
   return (
     <View>
-      <FlatList
-        data={state}
-        keyExtractor={(blogPosts) => blogPosts.title}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              style={styles.row}
-              onPress={() => navigation.navigate("Show", { id: item.id })}
-            >
-              <Text style={styles.title}>{item.title}</Text>
-              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                <Feather style={styles.icon} name="trash" />
+      {state.length === 0 ? (
+        <Text style={styles.noData}>No Notes Found</Text>
+      ) : (
+        <FlatList
+          data={state}
+          keyExtractor={(blogPosts) => blogPosts.title}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                style={styles.row}
+                onPress={() => navigation.navigate("Show", { id: item.id })}
+              >
+                <Text style={styles.title}>{item.title}</Text>
+                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                  <Feather style={styles.icon} name="trash" />
+                </TouchableOpacity>
               </TouchableOpacity>
-            </TouchableOpacity>
-          );
-        }}
-      />
+            );
+          }}
+        />
+      )}
     </View>
   );
 };
@@ -64,6 +67,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
+  },
+  noData: {
+    fontSize: 24,
+    alignSelf: "center",
+    top: 20,
+    color: "#000",
   },
 });
 
