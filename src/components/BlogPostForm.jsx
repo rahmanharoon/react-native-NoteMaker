@@ -40,9 +40,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     borderColor: "#000",
+    borderRadius: 10,
     marginBottom: 15,
     textAlignVertical: "top",
     paddingTop: 5,
+    paddingLeft: 10,
   },
   label: {
     fontSize: 18,
